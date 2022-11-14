@@ -15,6 +15,7 @@ public class RegistrationAndLogIn {
 
     @BeforeTest
     public static void credentials() {
+        name = "Vladimir";
         email = "vladi_dimov99@gmail.com";
         password = "123456";
     }
@@ -32,7 +33,7 @@ public class RegistrationAndLogIn {
     @Test
     public static void testWrongPassword() throws IOException {
         PostRequests postRequests = new PostRequests();
-        postRequests.login(email, "123450");
+        postRequests.login(email, password);
         String responseCode = postRequests.getResponseCode();
         Assert.assertTrue(responseCode.contains("200"), responseCode);
         String authMessage = postRequests.getAuthMessage();
@@ -52,7 +53,7 @@ public class RegistrationAndLogIn {
     @Test
     public static void testRegister() throws IOException{
         PostRequests postRequests = new PostRequests();
-        postRequests.register("Vladimir", "vladi_dimov1999@gmail.com", "123456");
+        postRequests.register(name, email, password);
         String responseCode = postRequests.getResponseCode();
         Assert.assertTrue(responseCode.contains("200"), responseCode);
         String authMessage = postRequests.getAuthMessage();

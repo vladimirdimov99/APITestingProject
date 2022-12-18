@@ -18,7 +18,6 @@ public class GetUserByID {
     public static String GetUserByID(String accessToken, String userID) throws IOException {
         String responseBody = "";
         CredentialsAndAllURL credentialsAndURL = new CredentialsAndAllURL();
-
         HttpGet getUsers = new HttpGet(credentialsAndURL.getBaseURL() + userID);
         getUsers.setHeader("Content-type", "application/json");
         getUsers.setHeader("Authorization", accessToken);

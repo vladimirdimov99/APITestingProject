@@ -35,7 +35,7 @@ public class RegisterLogInAndGetUserByID {
         String responseCode = registration.getResponseCode();
         Assert.assertTrue(responseCode.contains("200"), responseCode);
         String authMessage = registration.getAuthMessage();
-        //Assert.assertTrue(authMessage.contains("success"), authMessage);
+        Assert.assertTrue(authMessage.contains("success"), authMessage);
     }
 
     @Test(priority = 2)
@@ -44,17 +44,16 @@ public class RegisterLogInAndGetUserByID {
         logInToTheAccount.login(email, password);
         String responseCode = logInToTheAccount.getResponseCode();
         Assert.assertTrue(responseCode.contains("200"), responseCode);
+
         accessToken = logInToTheAccount.getAccessToken();
         userID = logInToTheAccount.getUserID();
-        System.out.println(accessToken);
         String authMessage = logInToTheAccount.getAuthMessage();
-        //Assert.assertTrue(authMessage.contains("success"), authMessage);
+        Assert.assertTrue(authMessage.contains("success"), authMessage);
     }
 
     @Test(priority = 3)
     public static void testGetUserByID() throws IOException, ParseException {
         LogInToTheAccount logInToTheAccount = new LogInToTheAccount();
-
         GetUserByID getUserByID = new GetUserByID();
         getUserByID.GetUserByID(accessToken, userID);
         Assert.assertEquals(name, logInToTheAccount.getName());

@@ -3,6 +3,7 @@ package PostRequests;
 import api.ResponseReader;
 import helpers.CredentialsAndAllURL;
 import helpers.JsonParser;
+import helpers.SetAccessToken;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -44,14 +45,13 @@ public class Registration {
             instream.close();
         }
         // Extract and set the access token
+        JsonParser json = new JsonParser();
+
         if (responseCode.contains("200") == true) {
-            JsonParser json = new JsonParser();
-            String authCode = json.getResponseCode(responseBody);
-            authMessage = json.getAuthMessage(responseBody);
-            if (authCode.equals("0")) {
-                accessToken = json.getAccessToken(responseBody);
-            }
+            SetAccessToken setAccessToken = new SetAccessToken();
+            accessToken = setAccessToken.CheckAuthCodeAndSetAccessToken(responseBody);
         }
+        authMessage = json.getAuthMessage(responseBody);
     }
 
     public static String getAccessToken() {

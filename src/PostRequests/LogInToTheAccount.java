@@ -46,12 +46,12 @@ public class LogInToTheAccount {
         // Extract and set the access token
         JsonParser json = new JsonParser();
         if (responseCode.contains("200") == true) {
-            String authCode = json.getResponseCode(responseBody);
             SetAccessToken setAccessToken = new SetAccessToken();
             accessToken = setAccessToken.CheckAuthCodeAndSetAccessToken(responseBody);
         }
         userID = json.getUserID(responseBody);
         name = json.getName(responseBody);
+        authMessage = json.getAuthMessage(responseBody);
     }
 
     public static String getAccessToken() {

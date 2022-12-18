@@ -57,5 +57,6 @@ public class RegisterLogInAndGetUserByID {
         GetUserByID getUserByID = new GetUserByID();
         getUserByID.GetUserByID(accessToken, userID);
         Assert.assertEquals(name, logInToTheAccount.getName());
+        Assert.assertEquals(accessToken, logInToTheAccount.getAccessToken());
     }
 }

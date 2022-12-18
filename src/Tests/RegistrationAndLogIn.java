@@ -1,6 +1,9 @@
 package Tests;
 
-import api.PostRequests;
+import PostRequests.LogInToTheAccount;
+import PostRequests.Registration;
+import helpers.CredentialsAndAllURL;
+import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -14,49 +17,51 @@ public class RegistrationAndLogIn {
     private static String password;
 
     @BeforeTest
-    public static void credentials() {
-        name = "Vladimir";
-        email = "vladi_dimov99@gmail.com";
-        password = "123456";
+    public static void credentials() throws IOException, ParseException {
+        CredentialsAndAllURL credentialsAndURL = new CredentialsAndAllURL();
+        credentialsAndURL.CredentialsAndURLS();
+        name = credentialsAndURL.getName();
+        email = credentialsAndURL.getEmail();
+        password = credentialsAndURL.getPassword();
     }
 
     @Test
-    public static void testSuccessfulLogin() throws IOException {
-        PostRequests postRequests = new PostRequests();
-        postRequests.login(email, password);
-        String responseCode = postRequests.getResponseCode();
+    public static void testSuccessfulLogin() throws IOException, ParseException {
+        LogInToTheAccount logInToTheAccount = new LogInToTheAccount();
+        logInToTheAccount.login(email, password);
+        String responseCode = logInToTheAccount.getResponseCode();
         Assert.assertTrue(responseCode.contains("200"), responseCode);
-        String authMessage = postRequests.getAuthMessage();
+        String authMessage = logInToTheAccount.getAuthMessage();
         Assert.assertTrue(authMessage.contains("success"), authMessage);
     }
 
     @Test
-    public static void testWrongPassword() throws IOException {
-        PostRequests postRequests = new PostRequests();
-        postRequests.login(email, password);
-        String responseCode = postRequests.getResponseCode();
+    public static void testWrongPassword() throws IOException, ParseException {
+        LogInToTheAccount logInToTheAccount = new LogInToTheAccount();
+        logInToTheAccount.login(email, password);
+        String responseCode = logInToTheAccount.getResponseCode();
         Assert.assertTrue(responseCode.contains("200"), responseCode);
-        String authMessage = postRequests.getAuthMessage();
+        String authMessage = logInToTheAccount.getAuthMessage();
         Assert.assertTrue(authMessage.contains("invalid"), authMessage);
     }
 
     @Test
-    public static void testWrongUsername() throws IOException {
-        PostRequests postRequests = new PostRequests();
-        postRequests.login("test@test.com", password);
-        String responseCode = postRequests.getResponseCode();
+    public static void testWrongUsername() throws IOException, ParseException {
+        LogInToTheAccount logInToTheAccount = new LogInToTheAccount();
+        logInToTheAccount.login(email, password);
+        String responseCode = logInToTheAccount.getResponseCode();
         Assert.assertTrue(responseCode.contains("200"), responseCode);
-        String authMessage = postRequests.getAuthMessage();
+        String authMessage = logInToTheAccount.getAuthMessage();
         Assert.assertTrue(authMessage.contains("invalid"), authMessage);
     }
 
     @Test
-    public static void testRegister() throws IOException{
-        PostRequests postRequests = new PostRequests();
-        postRequests.register(name, email, password);
-        String responseCode = postRequests.getResponseCode();
+    public static void testRegister() throws IOException, ParseException {
+        Registration registration = new Registration();
+        registration.register(name, email, password);
+        String responseCode = registration.getResponseCode();
         Assert.assertTrue(responseCode.contains("200"), responseCode);
-        String authMessage = postRequests.getAuthMessage();
+        String authMessage = registration.getAuthMessage();
         Assert.assertTrue(authMessage.contains("success"), authMessage);
     }
 }

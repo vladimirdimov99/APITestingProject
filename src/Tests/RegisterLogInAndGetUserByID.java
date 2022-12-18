@@ -1,11 +1,13 @@
 package Tests;
 
-import api.GetRequests;
-import api.PostRequests;
+import GetRequests.GetUserByID;
+import PostRequests.LogInToTheAccount;
+import PostRequests.Registration;
+import helpers.CredentialsAndAllURL;
+import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import java.io.IOException;
 
 public class RegisterLogInAndGetUserByID {
@@ -13,39 +15,48 @@ public class RegisterLogInAndGetUserByID {
     private static String name;
     private static String email;
     private static String password;
+    private static String accessToken;
+    private static String userID;
 
     @BeforeTest
-    public static void allCredentials() {
-        name = "Vladimir";
-        email = "vladi_dimov24@gmail.com";
-        password = "123456";
+    public static void allCredentials() throws IOException, ParseException {
+        CredentialsAndAllURL credentialsAndURL = new CredentialsAndAllURL();
+        credentialsAndURL.CredentialsAndURLS();
+
+        name = credentialsAndURL.getName();
+        email = credentialsAndURL.getEmail();
+        password = credentialsAndURL.getPassword();
     }
 
     @Test(priority = 1)
-    public static void testRegister() throws IOException {
-        PostRequests postRequests = new PostRequests();
-        postRequests.register(name, email, password);
-        String responseCode = postRequests.getResponseCode();
+    public static void testRegister() throws IOException, ParseException {
+        Registration registration = new Registration();
+        registration.register(name, email, password);
+        String responseCode = registration.getResponseCode();
         Assert.assertTrue(responseCode.contains("200"), responseCode);
-        String authMessage = postRequests.getAuthMessage();
-        Assert.assertTrue(authMessage.contains("success"), authMessage);
+        String authMessage = registration.getAuthMessage();
+        //Assert.assertTrue(authMessage.contains("success"), authMessage);
     }
 
     @Test(priority = 2)
-    public static void testSuccessfulLogin() throws IOException {
-        PostRequests postRequests = new PostRequests();
-        postRequests.login(email, password);
-        String responseCode = postRequests.getResponseCode();
+    public static void testSuccessfulLogin() throws IOException, ParseException {
+        LogInToTheAccount logInToTheAccount = new LogInToTheAccount();
+        logInToTheAccount.login(email, password);
+        String responseCode = logInToTheAccount.getResponseCode();
         Assert.assertTrue(responseCode.contains("200"), responseCode);
-        String authMessage = postRequests.getAuthMessage();
-        Assert.assertTrue(authMessage.contains("success"), authMessage);
+        accessToken = logInToTheAccount.getAccessToken();
+        userID = logInToTheAccount.getUserID();
+        System.out.println(accessToken);
+        String authMessage = logInToTheAccount.getAuthMessage();
+        //Assert.assertTrue(authMessage.contains("success"), authMessage);
     }
 
     @Test(priority = 3)
-    public static void testGetUserByID() throws  IOException{
-        GetRequests getRequests = new GetRequests();
-        PostRequests postRequests = new PostRequests();
-        getRequests.GetUserByID();
-        Assert.assertEquals(name, postRequests.getName());
+    public static void testGetUserByID() throws IOException, ParseException {
+        LogInToTheAccount logInToTheAccount = new LogInToTheAccount();
+
+        GetUserByID getUserByID = new GetUserByID();
+        getUserByID.GetUserByID(accessToken, userID);
+        Assert.assertEquals(name, logInToTheAccount.getName());
     }
 }

@@ -1,6 +1,7 @@
 package helpers;
 
 public class JsonParser {
+
     public static void main(String[] args) {    }
 
     public static String getAccessToken(String in) {
@@ -42,6 +43,7 @@ public class JsonParser {
         String userID = value.replace("\"", "");
         return userID;
     }
+
     public static String getName(String in) {
         String[] json = in.split(",");
         String data = json[3];

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="Run only RegisterLogInAndGetUserByID"><test verbose="2" preserve-order="true" name="C:/Users/Vladimir/IdeaProjects/APITestingProject"><classes><class name="Tests.RegisterLogInAndGetUserByID"><methods><include name="testRegister"/><include name="testSuccessfulLogin"/><include name="testGetUserByID"/></methods></class></classes></test></suite>

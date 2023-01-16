@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Run only RegisterLogInAndGetUserByID]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="C:/Users/Vladimir/IdeaProjects/APITestingProject(failed)">
+    <classes>
+      <class name="Tests.RegisterLogInAndGetUserByID">
+        <methods>
+          <include name="testRegister"/>
+          <include name="allCredentials"/>
+        </methods>
+      </class> <!-- Tests.RegisterLogInAndGetUserByID -->
+    </classes>
+  </test> <!-- C:/Users/Vladimir/IdeaProjects/APITestingProject(failed) -->
+</suite> <!-- Failed suite [Run only RegisterLogInAndGetUserByID] -->

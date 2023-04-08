@@ -17,7 +17,7 @@ public class RegistrationAndLogIn {
     private static String password;
 
     @BeforeTest
-    public static void credentials() throws IOException, ParseException {
+    public static void Credentials() throws IOException, ParseException {
         CredentialsAndAllURL credentialsAndURL = new CredentialsAndAllURL();
         credentialsAndURL.CredentialsAndURLS();
         name = credentialsAndURL.getName();
@@ -26,7 +26,7 @@ public class RegistrationAndLogIn {
     }
 
     @Test
-    public static void testSuccessfulLogin() throws IOException, ParseException {
+    public static void LogIn() throws IOException, ParseException {
         LogInToTheAccount logInToTheAccount = new LogInToTheAccount();
         logInToTheAccount.login(email, password);
         String responseCode = logInToTheAccount.getResponseCode();
@@ -36,7 +36,7 @@ public class RegistrationAndLogIn {
     }
 
     @Test
-    public static void testWrongPassword() throws IOException, ParseException {
+    public static void WrongPassword() throws IOException, ParseException {
         LogInToTheAccount logInToTheAccount = new LogInToTheAccount();
         logInToTheAccount.login(email, password);
         String responseCode = logInToTheAccount.getResponseCode();
@@ -46,7 +46,7 @@ public class RegistrationAndLogIn {
     }
 
     @Test
-    public static void testWrongUsername() throws IOException, ParseException {
+    public static void WrongUsername() throws IOException, ParseException {
         LogInToTheAccount logInToTheAccount = new LogInToTheAccount();
         logInToTheAccount.login(email, password);
         String responseCode = logInToTheAccount.getResponseCode();
@@ -56,7 +56,7 @@ public class RegistrationAndLogIn {
     }
 
     @Test
-    public static void testRegister() throws IOException, ParseException {
+    public static void Register() throws IOException, ParseException {
         Registration registration = new Registration();
         registration.register(name, email, password);
         String responseCode = registration.getResponseCode();

@@ -29,7 +29,7 @@ public class RegisterLogInAndGetUserByID {
     }
 
     @Test(priority = 1)
-    public static void testRegister() throws IOException, ParseException {
+    public static void RegisterSuccessfully() throws IOException, ParseException {
         Registration registration = new Registration();
         registration.register(name, email, password);
         String responseCode = registration.getResponseCode();
@@ -39,7 +39,7 @@ public class RegisterLogInAndGetUserByID {
     }
 
     @Test(priority = 2)
-    public static void testSuccessfulLogin() throws IOException, ParseException {
+    public static void LogInSuccessfully() throws IOException, ParseException {
         LogInToTheAccount logInToTheAccount = new LogInToTheAccount();
         logInToTheAccount.login(email, password);
         String responseCode = logInToTheAccount.getResponseCode();
@@ -52,7 +52,7 @@ public class RegisterLogInAndGetUserByID {
     }
 
     @Test(priority = 3)
-    public static void testGetUserByID() throws IOException, ParseException {
+    public static void GetUserByID() throws IOException, ParseException {
         LogInToTheAccount logInToTheAccount = new LogInToTheAccount();
         GetUserByID getUserByID = new GetUserByID();
         getUserByID.GetUserByID(accessToken, userID);

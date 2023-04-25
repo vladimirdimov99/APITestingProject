@@ -5,8 +5,8 @@
     <classes>
       <class name="Tests.RegisterLogInAndGetUserByID">
         <methods>
-          <include name="testRegister"/>
           <include name="allCredentials"/>
+          <include name="RegisterSuccessfully"/>
         </methods>
       </class> <!-- Tests.RegisterLogInAndGetUserByID -->
     </classes>
